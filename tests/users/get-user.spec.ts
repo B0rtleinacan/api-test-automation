@@ -1,4 +1,4 @@
-import test, { APIRequestContext, expect } from '@playwright/test';
+import { test, APIRequestContext, expect } from '@playwright/test';
 
 test('Get user, expect 200 status', async ({ request }: { request: APIRequestContext }) => {
     const response = await request.get(`https://fakerestapi.azurewebsites.net/api/v1/Users`);
