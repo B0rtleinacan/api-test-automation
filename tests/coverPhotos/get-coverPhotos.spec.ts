@@ -19,6 +19,7 @@ test('Get cover photo by idBook, expect 200 status', async ({ request }: {reques
 
 test('Get schema for cover photos, expect toMatchObject to be true', async ({ request }: { request: APIRequestContext }) =>{
     const response = await request.get(`https://fakerestapi.azurewebsites.net/api/v1/CoverPhotos/1`);
+    expect(response.status()).toBe(200);
     const body = await response.json();
 
     expect(body).toMatchObject({
