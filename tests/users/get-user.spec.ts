@@ -21,4 +21,3 @@ test('Get user by ID, expect 200 status', async ({ request }: { request: APIRequ
 
     expect(response.status()).toBe(200);
 })
-
