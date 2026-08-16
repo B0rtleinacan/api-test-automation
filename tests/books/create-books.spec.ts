@@ -1,5 +1,5 @@
 import { test, APIRequestContext, expect } from '@playwright/test';
-import { correctUserData } from './fakeData/user.data'; 
+import { correctBookData } from './fakeData/user.data'; 
 
 // Positive test for creating a new book using POST
 test('Create a new book, expect 200 status and response body to match the created book', async ({ request }: { request: APIRequestContext }) => {
@@ -19,11 +19,11 @@ test('Create a new book, expect 200 status and response body to match the create
     const responseBody = await response.json();
     expect(responseBody).toMatchObject({
         id: 201, 
-            title: 'bookTitle',
-            description: 'bookDescription',
-            excerpt: 'bookExcerpt',
-            publishDate: '2024-06-01T00:00:00Z',
-            pageCount: 100
+        title: 'bookTitle',
+        description: 'bookDescription',
+        excerpt: 'bookExcerpt',
+        publishDate: '2024-06-01T00:00:00Z',
+        pageCount: 100
     })
 });
 
@@ -83,7 +83,7 @@ test('Create a new book with incorrect publishDate field, expect 400 status', as
 
 // Using test data for positive tests
 
-for (const data of correctUserData) {
+for (const data of correctBookData) {
     test(`Using test data to create books ${data.objectTitle}`, async ({ request }: { request: APIRequestContext }) => {
         const response = await request.post('https://fakerestapi.azurewebsites.net/api/v1/Books', {
             data: {
@@ -106,7 +106,7 @@ test.afterAll(async ({ request }: { request: APIRequestContext }) => {
 })
 
 test.afterAll(async ({ request }: { request: APIRequestContext }) => {
-    for (const data of correctUserData){
+    for (const data of correctBookData){
         const response = await request.delete(`https://fakerestapi.azurewebsites.net/api/v1/Books/${data.id}`);
     expect(response.status()).toBe(200);
     }

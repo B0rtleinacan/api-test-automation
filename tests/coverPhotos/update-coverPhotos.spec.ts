@@ -9,6 +9,7 @@ test.beforeAll(async ({ request }: { request: APIRequestContext }) => {
             url: 'https://example.com/coverphoto.jpg'
         }
     });
+    expect(response.status()).toBe(200)
 }); 
 
 
