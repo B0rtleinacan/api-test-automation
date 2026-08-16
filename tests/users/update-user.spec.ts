@@ -8,7 +8,15 @@ test.beforeAll(async ({ request }: { request: APIRequestContext }) => {
             password: 'changedPassword'
         }
     });
+    expect(response.ok()).toBeTruthy();
     expect(response.status()).toBe(200);
+
+    const responseBody = await response.json();
+    expect(responseBody).toMatchObject({
+        id: 60, 
+        userName: 'changedGuy',
+        password: 'changedPassword'
+    })
 });
 
 test('Update user, expect 200 status', async ({ request }: { request: APIRequestContext}) => {
@@ -20,6 +28,13 @@ test('Update user, expect 200 status', async ({ request }: { request: APIRequest
         }
     });
     expect(response.status()).toBe(200);
+
+    const responseBody = await response.json();
+    expect(responseBody).toMatchObject({
+        id: 60, 
+        userName: 'changedGuy',
+        password: 'changingPassword'
+    })
 });
 
 test('Update user with incorrect userName field, expect 400 status', async ({ request }: { request: APIRequestContext }) => {
@@ -54,3 +69,4 @@ test('Update user with incorrect password field, expect 400 status', async ({ re
     });
     expect(response.status()).toBe(400);
 });
+
