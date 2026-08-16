@@ -70,3 +70,7 @@ test('Update user with incorrect password field, expect 400 status', async ({ re
     expect(response.status()).toBe(400);
 });
 
+test.afterAll(async ({ request }: { request: APIRequestContext }) => {
+    const response = await request.delete(`https://fakerestapi.azurewebsites.net/api/v1/Users/60`);
+    expect(response.status()).toBe(200);
+})
