@@ -57,3 +57,38 @@ test('Update pageCount, expect status code 200', async ({ request }: { request: 
     })
     expect(response.status()).toBe(200);
 })
+
+test('Update excerpt, expect status code 200', async ({ request }: { request: APIRequestContext }) => {
+    const response = await request.put('https://fakerestapi.azurewebsites.net/api/v1/Books/250', {
+        data: {
+            id: 250,
+            title: 'updatetitle',
+            description: 'updateDescription',
+            pageCount: 400,
+            excerpt: 'excerptUpdated',
+            publishDate: '2024-06-01T00:00:00Z',
+        }
+    })
+    expect(response.status()).toBe(200);
+})
+
+test('Update publishDate, expect status code 200', async ({ request }: { request: APIRequestContext }) => {
+    const response = await request.put('https://fakerestapi.azurewebsites.net/api/v1/Books/250', {
+        data: {
+            id: 250,
+            title: 'updatetitle',
+            description: 'updateDescription',
+            pageCount: 400,
+            excerpt: 'updateExcerpt',
+            publishDate: '2025-07-01T00:00:00Z',
+        }
+    })
+    expect(response.status()).toBe(200);
+})
+
+
+// Teardown 
+test.afterAll(async ({ request }: { request: APIRequestContext }) => {
+    const response = await request.delete('https://fakerestapi.azurewebsites.net/api/v1/Books/250');
+    expect(response.status()).toBe(200);
+})
