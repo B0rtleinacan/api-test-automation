@@ -1,5 +1,5 @@
 import { test, APIRequestContext, expect } from '@playwright/test';
-import { correctBookData } from './fakeData/user.data';
+import { correctBookData } from './fakeData/book-test.data'
 
 test.beforeAll(async ({ request }: { request: APIRequestContext }) => {
     const response = await request.post('https://fakerestapi.azurewebsites.net/api/v1/Books', {
