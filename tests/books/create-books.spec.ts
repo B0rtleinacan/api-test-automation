@@ -1,5 +1,5 @@
 import { test, APIRequestContext, expect } from '@playwright/test';
-import { correctBookData } from './fakeData/user.data'; 
+import { correctBookData, incorrectBookData } from './fakeData/book-test.data'
 
 // Positive test for creating a new book using POST
 test('Create a new book, expect 200 status and response body to match the created book', async ({ request }: { request: APIRequestContext }) => {
@@ -91,6 +91,25 @@ for (const data of correctBookData) {
                 title: data.title,
                 description: data.description,
                 excerpt: data.excerpt,
+                pageCount: data.pageCount,
+                publishDate: data.publishDate
+            }
+        });
+        expect(response.status()).toBe(data.expectedStatus);
+    });
+}
+
+// Test data for negative tests
+
+for (const data of incorrectBookData) {
+    test(`Attempt to create books using invalid fields ${data.objectTitle}, expect 400 status code`, async ({ request }: { request: APIRequestContext }) => {
+        const response = await request.post('https://fakerestapi.azurewebsites.net/api/v1/Books', {
+            data: {
+                id: data.id, 
+                title: data.title,
+                description: data.description,
+                excerpt: data.excerpt,
+                pageCount: data.pageCount,
                 publishDate: data.publishDate
             }
         });
