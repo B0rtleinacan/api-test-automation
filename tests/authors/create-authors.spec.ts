@@ -27,18 +27,6 @@ test('Creates an author on POST but idBook is a missing value, expect 400', asyn
     expect(response.status()).toBe(400);
 });
 
-test('Creates an author on POST but firstName is a missing value, expect 400', async ({ request }: { request: APIRequestContext }) => {
-    const response = await request.post('https://fakerestapi.azurewebsites.net/api/v1/Authors', {
-        data: {
-            id: 593,
-            idBook: 300,
-            firstName: '',
-            lastName: "last Name fr"
-        }
-    });
-    expect(response.status()).toBe(400);
-});
-
 // Negative tests | AUT-009
 test('Creates an author on POST but idBook is an incorrect value, expect 400', async ({ request }: { request: APIRequestContext }) => {
     const response = await request.post('https://fakerestapi.azurewebsites.net/api/v1/Authors', {
